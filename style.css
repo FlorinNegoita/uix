@@ -1,0 +1,164 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f4f6fb;
+  color: #222;
+}
+
+.topbar {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 16px;
+  letter-spacing: 2px;
+}
+
+/* GRID */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  padding: 16px;
+  overflow: visible;
+}
+
+/* CELULA */
+.day {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  height: 80px;
+  width: 100%;
+
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.6);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #f4f6fb;
+
+  box-shadow:
+    5px 5px 6px rgba(0,0,0,0.16),
+    -5px -5px 6px rgba(255,255,255,0.195);
+
+  transform-origin: center center;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border 0.25s ease;
+}
+
+/* lumina pe toata celula */
+.day::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 10px;
+  filter: blur(16px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* culori glow pe celula */
+.sc1::after {
+  background: rgba(59, 130, 246, 0.32);
+}
+
+.sc2::after {
+  background: rgba(249, 115, 22, 0.32);
+}
+
+.sc3::after {
+  background: rgba(99, 102, 241, 0.32);
+}
+
+.lib::after {
+  background: rgba(34, 197, 94, 0.28);
+}
+
+/* HOVER */
+.day:hover {
+  z-index: 5;
+  transform: translateY(-2px);
+
+  box-shadow:
+    6px 6px 7px rgba(0,0,0,0.18),
+    -6px -6px 7px rgba(255,255,255,1);
+}
+
+/* ZIUA CURENTA */
+.today {
+  position: relative;
+  z-index: 999;
+  width: calc(100% + 8px);
+  margin-left: -4px;
+  transform: scale(1.22, 1.22);
+  transform-origin: center center;
+
+  border: 1px solid rgba(220, 38, 38, 0.75);
+
+  box-shadow:
+    8px 8px 8px rgba(0,0,0,0.24),
+    -6px -6px 8px rgba(255,255,255,1);
+}
+
+.today:hover {
+  z-index: 999;
+  transform: scale(1.22, 1.22);
+}
+
+/* text peste glow */
+.day-number,
+.shift-label {
+  position: relative;
+  z-index: 2;
+}
+
+/* DATA */
+.day-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+  line-height: 1;
+}
+
+/* SCHIMB */
+.shift-label {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 6px;
+  opacity: 1;
+}
+
+/* culori text schimb */
+.sc1 .shift-label {
+  color: #54B4D3;
+  text-shadow:
+    0 0 4px rgba(59,130,246,0.35),
+    0 0 8px rgba(59,130,246,0.20);
+}
+
+.sc2 .shift-label {
+  color: #E4A11B;
+  text-shadow:
+    0 0 4px rgba(249,115,22,0.35),
+    0 0 8px rgba(249,115,22,0.20);
+}
+
+.sc3 .shift-label {
+  color: #DC4C64;
+  text-shadow:
+    0 0 4px rgba(99,102,241,0.35),
+    0 0 8px rgba(99,102,241,0.20);
+}
+
+.lib .shift-label {
+  color: #15803d;
+  text-shadow:
+    0 0 4px rgba(34,197,94,0.32),
+    0 0 8px rgba(34,197,94,0.18);
+}
