@@ -41,7 +41,7 @@ body {
   background: #f4f6fb;
 
   box-shadow:
-    5px 5px 6px rgba(0,0,0,0.16),
+    5px 5px 6px rgba(0,0,0,0.36),
     -5px -5px 6px rgba(255,255,255,0.195);
 
   transform-origin: center center;
