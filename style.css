@@ -27,7 +27,7 @@ body {
   position: relative;
   z-index: 1;
   overflow: visible;
-  height: 50px;
+  height: 60px;
   width: 100%;
 
   border-radius: 6px;
@@ -57,7 +57,7 @@ body {
   position: absolute;
   inset: 8px;
   border-radius: 10px;
-  filter: blur(16px);
+  filter: blur(26px);
   z-index: 0;
   pointer-events: none;
 }
@@ -121,7 +121,7 @@ body {
 .day-number {
   font-size: 13px;
   font-weight: 700;
-  color: #111;
+  color: #110;
   line-height: 1;
 }
 
