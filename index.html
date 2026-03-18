@@ -6,15 +6,56 @@
   <title>TuraB</title>
 
   <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="theme-color" content="#f4f6fb">
 
   <link rel="stylesheet" href="style.css">
 </head>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
 <body>
 
 <header class="topbar">TEAM B</header>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1976d2">
+
+<section class="overtime">
+  <div class="label">OVERTIME</div>
+  <div id="overtimeText" class="positive"></div>
+</section>
+
+<section class="month-nav">
+  <button id="prev">‹</button>
+  <div id="monthTitle"></div>
+  <button id="next">›</button>
+</section>
+
+<div class="today-wrap">
+  <button id="todayBtn">AZI</button>
+</div>
+
+<div class="weekdays">
+  <span>LU</span><span>MA</span><span>MA</span>
+  <span>JO</span><span>VI</span><span>SA</span><span>DU</span>
+</div>
+
 <div class="calendar" id="calendar"></div>
+
+<div class="legend">
+  <span><i class="sc1"></i>SC1</span>
+  <span><i class="sc2"></i>SC2</span>
+  <span><i class="sc3"></i>SC3</span>
+  <span><i class="lib"></i>LIBER</span>
+  <span><i class="CO"></i>CO</span>
+</div>
+
+<footer id="todayFooter"></footer>
 
 <script src="app.js"></script>
 </body>

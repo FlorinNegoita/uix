@@ -7,22 +7,131 @@ body {
 
 .topbar {
   text-align: center;
-  font-size: 26px;
-  font-weight: 700;
-  padding: 16px;
-  letter-spacing: 2px;
+  font-size: 40px;
+  font-weight: 600;
+  padding: 16px 2px;
+  letter-spacing: 3px;
+
+  color: #ecf0f3; /* aceeași culoare ca background */
+
+  text-shadow:
+    -4px -2px 3px rgba(255,255,255,0.9),   /* highlight */
+     4px  2px 3px rgba(0,0,0,0.5);        /* shadow */
 }
+
+/* OVERTIME */
+.overtime {
+  text-align: center;
+  margin-top: 0px;
+}
+.overtime .label {
+  font-size: 12px;
+  color: #666;
+}
+.overtime .positive { color: #16a34a; }
+.overtime .negative { color: #dc2626; }
+
+/* MONTH NAV */
+.month-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-weight: 700;
+}
+.month-nav button {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #ecf0f3;
+  color: #2563eb;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  box-shadow:
+    5px 5px 8px rgba(0,0,0,0.22),
+    -5px -5px 8px rgba(255,255,255,0.9);
+
+  transition: all 0.2s ease;
+}
+
+.month-nav button:active {
+  box-shadow:
+    inset 3px 3px 6px rgba(0,0,0,0.22),
+    inset -3px -3px 6px rgba(255,255,255,0.9);
+
+  transform: scale(0.96);
+}
+
+/* AZI */
+.today-wrap { 
+  text-align: center;
+  margin-top: -8px;   /* 👈 urcă butonul */
+  margin-bottom: 8px;
+
+  }
+.today-wrap button {
+  background: #ecf0f3;
+  color: #3b82f6;
+
+  border: none;
+  border-radius: 16px;
+  padding: 12px 24px;
+  font-weight: 600;
+
+  box-shadow:
+    5px 5px 8px rgba(0,0,0,0.25),
+    -5px -5px 8px rgba(255,255,255,0.9);
+
+  transition: all 0.2s ease;
+}
+.today-wrap button:active {
+  box-shadow:
+    inset 3px 3px 6px rgba(0,0,0,0.25),
+    inset -3px -3px 6px rgba(255,255,255,0.9);
+
+  transform: scale(0.97);
+}
+.today-wrap button.pulse {
+  animation: pulseToday 2s infinite;
+}
+/* WEEKDAYS */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 12px;
+  margin-bottom: 22px;
+  margin-top: 22px;
+}
+
 
 /* GRID */
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 12px;
+  column-gap: 6px;
+  row-gap: 12px;
   padding: 16px;
   overflow: visible;
 }
 
+.calendar {
+  transition: transform 0.25s ease;
+}
+
+.calendar.animate {
+  transform: scale(0.98);
+}
 /* CELULA */
+
+
 .day {
   position: relative;
   z-index: 1;
@@ -62,6 +171,14 @@ body {
   pointer-events: none;
 }
 
+.day.weekend {
+  background: rgba(0,0,0,0.03);
+}
+/* zile din alte luni */
+.other .date {
+  opacity: 0.4;
+}
+
 /* culori glow pe celula */
 .sc1::after {
   background: rgba(59, 130, 246, 0.32);
@@ -95,7 +212,7 @@ body {
   z-index: 999;
   width: calc(100% + 8px);
   margin-left: -4px;
-  transform: scale(1.22, 1.22);
+  transform: scale(1.42, 1.42);
   transform-origin: center center;
 
   border: 1px solid rgba(220, 38, 38, 0.75);
@@ -128,7 +245,7 @@ body {
 /* SCHIMB */
 .shift-label {
   font-size: 11px;
-  font-weight: 5400;
+  font-weight: 500;
   line-height: 1.1;
   margin-top: 6px;
   opacity: 1;
@@ -161,4 +278,142 @@ body {
   text-shadow:
     0 0 4px rgba(34,197,94,0.32),
     0 0 8px rgba(34,197,94,0.18);
+}
+
+/* fara hover pentru zilele din alte luni */
+.other:hover {
+  transform: none;
+  box-shadow:
+    5px 5px 6px rgba(0,0,0,0.36),
+    -5px -5px 6px rgba(255,255,255,0.195);
+}
+
+.other::after {
+  display: none;
+}
+
+/* LEGENDA */
+.legend {
+  position: fixed;
+  bottom: 58px;                  /* 👈 deasupra footer-ului */
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+
+  font-size: 12px;
+  background: rgba(242,242,247,0.95);
+  padding: 8px 0;
+
+  border-top: 1px solid #e5e7eb;
+  z-index: 999;
+
+  /* safe area */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.legend i {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;                     /* 👈 JOS DE TOT */
+  left: 0;
+  right: 0;
+
+  margin: 0;                     /* foarte important */
+  padding: 12px 16px;
+
+  
+  color: black;
+  text-align: center;
+  font-weight: 600;
+
+  border-radius: 0;              /* iOS-style */
+  z-index: 1000;
+
+  /* safe area iPhone */
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
+
+.day.vacation {
+  background: linear-gradient(
+    135deg,
+    rgba(56,189,248,0.75),
+    rgba(110,231,183,0.75)
+  );
+
+  border: 2px solid rgba(139,92,246,0.7);
+  color: #1e1b4b;
+  font-weight: 700;
+}
+/* SARBATORI LEGALE */
+.day.holiday {
+  color: #d32f2f; /* roșu iOS-like */
+  font-weight: 600;
+}
+
+.day.holiday .shift {
+  color: #d32f2f;
+}
+
+/* ===== LEGEND DOTS FIX ===== */
+.legend i {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* doar pătrățelul, NU textul */
+.legend .sc1 { background: #54B4D3; }
+.legend .sc2 { background: #E4A11B; }
+.legend .sc3 { background: #DC4C64; }
+.legend .lib { background: #15803d; }
+.legend .CO {
+  background: linear-gradient(
+    135deg,
+    #22c55e,   /* verde */
+    #3b82f6    /* albastru */
+  );
+}
+
+
+@keyframes pulseToday {
+  0% {
+    box-shadow:
+      6px 6px 10px rgba(0,0,0,0.25),
+      -6px -6px 10px rgba(255,255,255,0.9);
+  }
+  50% {
+    box-shadow:
+      0 0 12px rgba(59,130,246,0.6),
+      6px 6px 10px rgba(0,0,0,0.25),
+      -6px -6px 10px rgba(255,255,255,0.9);
+  }
+  100% {
+    box-shadow:
+      6px 6px 10px rgba(0,0,0,0.25),
+      -6px -6px 10px rgba(255,255,255,0.9);
+  }
+}
+
+@keyframes todayGlow {
+  0% { box-shadow: 8px 8px 8px rgba(0,0,0,0.24), -6px -6px 8px rgba(255,255,255,1); }
+  50% { box-shadow: 0 0 12px rgba(59,130,246,0.6), 8px 8px 8px rgba(0,0,0,0.24), -6px -6px 8px rgba(255,255,255,1); }
+  100% { box-shadow: 8px 8px 8px rgba(0,0,0,0.24), -6px -6px 8px rgba(255,255,255,1); }
+}
+
+.today {
+  animation: todayGlow 5s infinite;
 }
