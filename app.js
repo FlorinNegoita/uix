@@ -8,6 +8,7 @@ const hoursPerDay = 8;
 const startDayNumber = dayNumber(2026, 0, 6);
 
 let current = new Date();
+let slideDirection = 0;
 
 const calendar = document.getElementById("calendar");
 const monthTitle = document.getElementById("monthTitle");
@@ -92,8 +93,20 @@ function render() {
 
   clearTimeout(window.todayPopTimer);
 
-  calendar.classList.add("animate");
-  setTimeout(() => calendar.classList.remove("animate"), 200);
+  calendar.classList.remove("slide-left", "slide-right", "animate");
+
+  if (slideDirection === -1) {
+    calendar.classList.add("slide-left");
+  } else if (slideDirection === 1) {
+    calendar.classList.add("slide-right");
+  } else {
+    calendar.classList.add("animate");
+  }
+
+  setTimeout(() => {
+    calendar.classList.remove("slide-left", "slide-right", "animate");
+    slideDirection = 0;
+  }, 700);
 
   const isCurrentMonth =
     current.getMonth() === today.getMonth() &&
@@ -144,21 +157,17 @@ function render() {
 
       div.classList.add(shift);
 
-      if (d.getDay() === 0 || d.getDay() === 6) {
-        div.classList.add("weekend");
-      }
+   //  if (d.getDay() === 0 || d.getDay() === 6) {
+   //    div.classList.add("weekend");
+   //   }
 
       if (isHoliday) div.classList.add("holiday");
-      if (isVacation) div.classList.add("vacation"); // CO bate vizual tot
+      if (isVacation) div.classList.add("vacation");
 
-      // ===== CALCUL ORE =====
-
-      // ore lucrate (L–D)
       if (!isVacation && shift !== "lib") {
         worked += hoursPerDay;
       }
 
-      // norma (doar L–V)
       if (isWeekday) {
         workdays++;
         if (isVacation) vacationDaysInMonth++;
@@ -218,16 +227,19 @@ function render() {
 // =======================
 
 document.getElementById("prev").onclick = () => {
+  slideDirection = 1;
   current.setMonth(current.getMonth() - 1);
   render();
 };
 
 document.getElementById("next").onclick = () => {
+  slideDirection = -1;
   current.setMonth(current.getMonth() + 1);
   render();
 };
 
 document.getElementById("todayBtn").onclick = () => {
+  slideDirection = 0;
   current = new Date();
   render();
 };

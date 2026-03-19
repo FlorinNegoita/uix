@@ -3,18 +3,18 @@ body {
   font-family: sans-serif;
 
   background:
-    radial-gradient(
-      circle at top left,
-      rgba(255,255,255,0.95) 0%,
-      rgba(255,255,255,0.6) 25%,
-      rgba(255,255,255,0.2) 45%,
-      transparent 65%
-    ),
-    linear-gradient(
-      135deg,
-      #f1f5f9,
-      #e2e8f0
-    );
+  radial-gradient(
+    circle at top left,
+    rgba(240,243,247,0.90) 0%,
+    rgba(234,238,243,0.68) 22%,
+    rgba(226,231,237,0.28) 42%,
+    transparent 62%
+  ),
+  linear-gradient(
+    135deg,
+    #d8dde6 0%,
+    #ccd3dd 100%
+  );
 
   min-height: 100vh;
   color: #222;
@@ -30,8 +30,8 @@ body {
   color: #ecf0f3; /* aceeași culoare ca background */
 
   text-shadow:
-    -4px -2px 2px rgba(255,255,255,0.9),   /* highlight */
-     4px  2px 2px rgba(0,0,0,0.3);        /* shadow */
+    -4px -2px 2px rgba(255,255,255,0.75),   /* highlight */
+     4px  2px 2px rgba(0,0,0,0.6);        /* shadow */
 }
 
 /* OVERTIME */
@@ -47,6 +47,10 @@ body {
 .overtime .negative { color: #dc2626; }
 
 /* MONTH NAV */
+#monthTitle{
+  color: #3b82f6;
+}
+
 .month-nav {
   display: flex;
   justify-content: space-between;
@@ -68,15 +72,15 @@ body {
   cursor: pointer;
 
   box-shadow:
-    5px 5px 8px rgba(0,0,0,0.22),
-    -5px -5px 8px rgba(255,255,255,0.9);
+    2px 2px 2px rgba(0,0,0,0.75),
+    -2px -2px 5px rgba(255,255,255,0.9);
 
   transition: all 0.2s ease;
 }
 
 .month-nav button:active {
   box-shadow:
-    inset 3px 3px 6px rgba(0,0,0,0.22),
+    inset 5px 5px 10px rgba(0,0,0,0.727),
     inset -3px -3px 6px rgba(255,255,255,0.9);
 
   transform: scale(0.96);
@@ -98,8 +102,8 @@ body {
   font-weight: 600;
 
   box-shadow:
-    5px 5px 8px rgba(0,0,0,0.25),
-    -5px -5px 8px rgba(255,255,255,0.9);
+    5px 5px 8px rgba(0,0,0,0.75),
+    -2px -2px 8px rgba(255,255,255,0.9);
 
   transition: all 0.2s ease;
 }
@@ -163,8 +167,8 @@ body {
   background: #ecf0f3;
 
   box-shadow:
-    5px 5px 6px rgba(0,0,0,0.36),
-    -5px -5px 6px rgba(255,255,255,0.195);
+    5px 5px 10px rgba(0,0,0,0.76),
+    -5px -5px 8px rgba(255,255,255,0.55);
 
   transform-origin: center center;
   transition:
@@ -480,4 +484,34 @@ footer {
   100% {
     transform: scale(1.35, 1.35);
   }
+}
+
+@keyframes slideLeftIn {
+  0% {
+    opacity: 0.65;
+    transform: translateX(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRightIn {
+  0% {
+    opacity: 0.65;
+    transform: translateX(-22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.calendar.slide-left {
+  animation: slideLeftIn 0.7s ease;
+}
+
+.calendar.slide-right {
+  animation: slideRightIn 0.7s ease;
 }
