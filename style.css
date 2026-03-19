@@ -221,6 +221,9 @@ html, body {
 .other .date {
   opacity: 0.4;
 }
+.other {
+  opacity: 0.38;
+}
 
 /* culori glow pe celula */
 .sc1::after {
