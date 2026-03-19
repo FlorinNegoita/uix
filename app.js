@@ -23,7 +23,7 @@ function dayNumber(y, m, d) {
 }
 
 function dateKey(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 // =======================
@@ -31,13 +31,13 @@ function dateKey(d) {
 // =======================
 
 const vacationDays = new Set([
-  "2026-04-10","2026-04-11","2026-04-12","2026-04-13",
-  "2026-08-08","2026-08-09","2026-08-10","2026-08-11",
-  "2026-08-12","2026-08-13","2026-08-14","2026-08-15",
-  "2026-08-16","2026-08-17","2026-08-18","2026-08-19",
-  "2026-08-20","2026-08-21","2026-08-22","2026-08-23",
-  "2026-12-23","2026-12-24","2026-12-25","2026-12-26",
-  "2026-12-27","2026-12-28","2026-12-29","2026-12-30",
+  "2026-04-10", "2026-04-11", "2026-04-12", "2026-04-13",
+  "2026-08-08", "2026-08-09", "2026-08-10", "2026-08-11",
+  "2026-08-12", "2026-08-13", "2026-08-14", "2026-08-15",
+  "2026-08-16", "2026-08-17", "2026-08-18", "2026-08-19",
+  "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23",
+  "2026-12-23", "2026-12-24", "2026-12-25", "2026-12-26",
+  "2026-12-27", "2026-12-28", "2026-12-29", "2026-12-30",
   "2026-12-31",
 ]);
 
@@ -46,30 +46,30 @@ const vacationDays = new Set([
 // =======================
 
 const holidays = new Set([
-  "2026-01-01",  //anul nou
-  "2026-01-02",  //a doua zi de anul nou
-  "2026-01-06",  //Boboteaza
-  "2026-01-07",  //sf. Ion
-  "2026-01-24",  //mica unire
-  "2026-04-10",  //vinerea mare
-  "2026-04-11",  //sambata mare
-  "2026-04-12",  //Pastele
-  "2026-04-13",  //a doua zi de Paste
-  "2026-05-01",  //ziua muncii
-  "2026-05-31",  //Rusaliile
-  "2026-06-01",  //a doua zi de Rusalii, ziua copilului
-  "2026-08-15",  //sf. Maria
-  "2026-11-30",  //sf.Andrei
-  "2026-12-01",  //ziua Romaniei
-  "2026-12-25",  //Craciunul
-  "2026-12-26"   //a doua zi de Craciun
+  "2026-01-01", // anul nou
+  "2026-01-02", // a doua zi de anul nou
+  "2026-01-06", // Boboteaza
+  "2026-01-07", // sf. Ion
+  "2026-01-24", // mica unire
+  "2026-04-10", // vinerea mare
+  "2026-04-11", // sambata mare
+  "2026-04-12", // Pastele
+  "2026-04-13", // a doua zi de Paste
+  "2026-05-01", // ziua muncii
+  "2026-05-31", // Rusaliile
+  "2026-06-01", // a doua zi de Rusalii, ziua copilului
+  "2026-08-15", // sf. Maria
+  "2026-11-30", // sf.Andrei
+  "2026-12-01", // ziua Romaniei
+  "2026-12-25", // Craciunul
+  "2026-12-26"  // a doua zi de Craciun
 ]);
 
 // =======================
 // SHIFT LOGIC
 // =======================
 
-const cycle = ["sc1","sc1","sc2","sc2","sc3","sc3","lib","lib"];
+const cycle = ["sc1", "sc1", "sc2", "sc2", "sc3", "sc3", "lib", "lib"];
 
 function shiftFor(date) {
   const dn = dayNumber(
@@ -88,24 +88,24 @@ function shiftFor(date) {
 function render() {
   calendar.innerHTML = "";
 
-const today = new Date();
+  const today = new Date();
 
+  clearTimeout(window.todayPopTimer);
 
+  calendar.classList.add("animate");
+  setTimeout(() => calendar.classList.remove("animate"), 200);
 
-calendar.classList.add("animate");
-setTimeout(() => calendar.classList.remove("animate"), 200);
+  const isCurrentMonth =
+    current.getMonth() === today.getMonth() &&
+    current.getFullYear() === today.getFullYear();
 
-const isCurrentMonth =
-  current.getMonth() === today.getMonth() &&
-  current.getFullYear() === today.getFullYear();
+  const todayBtn = document.getElementById("todayBtn");
 
-const todayBtn = document.getElementById("todayBtn");
-
-if (isCurrentMonth) {
-  todayBtn.classList.remove("pulse");
-} else {
-  todayBtn.classList.add("pulse");
-}
+  if (isCurrentMonth) {
+    todayBtn.classList.remove("pulse");
+  } else {
+    todayBtn.classList.add("pulse");
+  }
 
   const y = current.getFullYear();
   const m = current.getMonth();
@@ -124,6 +124,7 @@ if (isCurrentMonth) {
   let worked = 0;
   let workdays = 0;
   let vacationDaysInMonth = 0;
+  let todayDiv = null;
 
   for (let i = 0; i < totalCells; i++) {
     const d = new Date(y, m, i - start + 1);
@@ -142,9 +143,10 @@ if (isCurrentMonth) {
       const isWeekday = d.getDay() > 0 && d.getDay() < 6;
 
       div.classList.add(shift);
+
       if (d.getDay() === 0 || d.getDay() === 6) {
-  div.classList.add("weekend");
-}
+        div.classList.add("weekend");
+      }
 
       if (isHoliday) div.classList.add("holiday");
       if (isVacation) div.classList.add("vacation"); // CO bate vizual tot
@@ -168,16 +170,22 @@ if (isCurrentMonth) {
       `;
     }
 
-    const today = new Date();
     if (
       d.getDate() === today.getDate() &&
       d.getMonth() === today.getMonth() &&
       d.getFullYear() === today.getFullYear()
     ) {
       div.classList.add("today");
+      todayDiv = div;
     }
 
     calendar.appendChild(div);
+  }
+
+  if (isCurrentMonth && todayDiv) {
+    window.todayPopTimer = setTimeout(() => {
+      todayDiv.classList.add("today-pop");
+    }, 800);
   }
 
   // =======================
