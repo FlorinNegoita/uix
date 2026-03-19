@@ -2,9 +2,10 @@
   "name": "TuraB",
   "short_name": "TuraB",
   "start_url": ".",
-  "display": "standalone",
-  "background_color": "#f4f6fb",
-  "theme_color": "#f4f6fb",
+  "display": "fullscreen",
+  "background_color": "#d8dde6",
+  "theme_color": "#d8dde6",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icon-192.png",
