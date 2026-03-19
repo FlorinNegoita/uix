@@ -71,11 +71,21 @@ body {
   justify-content: center;
   cursor: pointer;
 
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+
   box-shadow:
     2px 2px 2px rgba(0,0,0,0.75),
     -2px -2px 5px rgba(255,255,255,0.9);
 
   transition: all 0.2s ease;
+}
+
+.month-nav button:focus,
+.month-nav button:focus-visible {
+  outline: none;
 }
 
 .month-nav button:active {
