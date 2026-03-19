@@ -263,15 +263,7 @@ html, body {
   );
 }
 
-/* HOVER */
-.day:hover {
-  z-index: 5;
-  transform: translateY(-2px);
 
-  box-shadow:
-    6px 6px 7px rgba(0,0,0,0.18),
-    -6px -6px 7px rgba(255,255,255,1);
-}
 
 /* ZIUA CURENTA - normală la început */
 .today {
@@ -294,7 +286,7 @@ html, body {
     -6px -6px 8px rgba(255,255,255,1);
 
   animation:
-    todayPop 0.9s ease,
+    todayPop 0.9s ease forwards,
     todayGlow 5s infinite;
 }
 
@@ -501,13 +493,13 @@ footer {
 
 @keyframes todayPop {
   0% {
-    transform: scale(1, 1);
+    transform: scale(1);
   }
   60% {
-    transform: scale(1.42, 1.42);
+    transform: scale(1.42);
   }
   100% {
-    transform: scale(1.35, 1.35);
+    transform: scale(1.35);
   }
 }
 
